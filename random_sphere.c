@@ -4,27 +4,19 @@
 
 
 // 経度
-double cal_latitude(double z){
-    double res = acos(z) * 180 / M_PI;
-    if (res < 0) res = 360.0 + res;
-    return res - 180;
+double cal_latitude(double x, double y){
+    double temp = sqrt(pow(x, 2.0) + pow(y, 2.0));
+    double res = acos(x / temp) * 180 / M_PI;
+    if (y < 0.0) {
+        res = - res;
+    }
+    return res;
 }
 
 // 緯度
-double cal_longitude(double x, double y){
-    double res;
-    if (y == 0.0) {
-        res = 0;
-    } else {
-        res = atan(y / x) * 180 / M_PI;
-    }
-    if (res < 0) res = 360.0 + res;
-
-    if (res >= 180) {
-        return res - 270;
-    } else {
-        return  -(res - 90);
-    } 
+double cal_longitude(double z){
+    double res = acos(z) * 180.0 / M_PI;
+    return 90.0 - res;
 }
 
 double limited_rand(){
@@ -60,14 +52,12 @@ void random_sphere(int num)
         cordinates[i][0] = tX;
         cordinates[i][1] = tY;
         cordinates[i][2] = tZ;
-        // printf("(%f, %f, %f)\n", tX, tY, tZ);
-        printf("%f %f,", cal_latitude(tZ), cal_longitude(tX, tY));
+        printf("%f %f,", cal_latitude(tX, tY), cal_longitude(tZ));
     }
 }
 
 int main (void){
     int num;
-    printf("Please input data size: ");
     scanf("%d", &num);
     random_sphere(num);
 }
