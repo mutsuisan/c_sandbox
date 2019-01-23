@@ -17,9 +17,10 @@ int main(void) {
 
     while (1) {
         int menu, x;
-        printf("Current data: %d / %d", Size(&stack), Capacity(&stack));
-        printf("\t Please choose an action: ");
+        printf("Current data: %d / %d\n", Size(&stack), Capacity(&stack));
+        printf("Please choose an action (0 FIN 1 PUSH 2 POP 3 PRINT): ");
         scanf("%d", &menu);
+        
         if (menu == 0) break;
         
         /* TODO: ADD MORE FEATURES */
@@ -34,11 +35,20 @@ int main(void) {
                     printf("Added '%d' to stack\n", x);
                 }
                 break;
+            case 2:
+                puts("Pop: ");
+                if (Pop(&stack, &x) == -1) {
+                    puts("Failed to pop");
+                } else {
+                    printf("Poped '%d' from stack\n", x);
+                }
+                break;
+            case 3:
+                puts("Print: ");
+                Print(&stack);
+                break;
         }
     }
-
-    // print items
-    Print(&stack);
 
     // terminate stack
     Terminate(&stack);

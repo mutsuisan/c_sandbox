@@ -43,7 +43,7 @@ void Print(IntStack *s) {
     for (int i = 0; i < s->max; i++) {
         printf("%d ", s->stk[i]);
     }
-    puts("\n");
+    putchar('\n');
 }
 
 void Terminate(IntStack *s) {
